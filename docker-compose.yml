@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+    web:
+        build: ./services/web
+        command: python manage.py run -h 0.0.0.0
+        volumes:
+            - ./services/web/:/usr/src/app/
+        ports:
+            - 5000:5000
+        env_file:
+            - ./.env.dev
+        environment:
+            - ENV=development
+            - PORT=4000
+            - DB=mongodb://mongodb:27017/super_users
+        depends_on:
+            - mongodb
+    mongodb:
+        image: mongo
+        container_name: 'mongodb'
+        restart: always
+        environment:
+            - MONGO_INITDB_DATABASE=super_users
+            - MONGO_INITDB_ROOT_USERNAME=root
+            - MONGO_INITDB_ROOT_PASSWORD=example
