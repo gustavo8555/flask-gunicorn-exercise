@@ -1,11 +1,12 @@
 from flask import Flask, Response, request
 from db.database import initialize_db
 from db.models import User 
+import json
 
 app = Flask(__name__)
 
 app.config['MONGODB_SETTINGS'] = {
-        'host': 'mongodb://root:example@127.0.0.1:27017/super_users'
+        'host': 'mongodb://root:example@mongodb:27017/super_users'
         }
 
 initialize_db(app)
@@ -22,4 +23,3 @@ def add_user():
     email = user.email
     return {'email': str(email)}, 200
 
-app.run()
