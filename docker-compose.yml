@@ -24,3 +24,7 @@ services:
             - MONGO_INITDB_DATABASE=super_users
             - MONGO_INITDB_ROOT_USERNAME=root
             - MONGO_INITDB_ROOT_PASSWORD=example
+        volumes:
+            - ./services/web/db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
+        ports:
+            - '27017-27019:27017-27019'
