@@ -35,6 +35,10 @@ def test_update_put():
     r = requests.put(url+'/users/gustavo8555@hotmail.com', data=json.dumps(payload, indent=4), headers=headers)
     assert r.status_code == 200
 
+    r = requests.get(url+'/users')
+    data = r.json()
+    assert data[0]['nome'] == 'gustavo lima'
+
 def test_delete():
     r = requests.delete(url+'/users/gustavo8555@hotmail.com')
     assert r.status_code == 200
