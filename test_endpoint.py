@@ -27,3 +27,7 @@ def test_get():
 
     assert r.status_code == 200
     assert data[0]['email'] == 'gustavo8555@hotmail.com'
+
+def test_delete():
+    r = requests.delete(url+'/users/gustavo8555@hotmail.com')
+    assert r.status_code == 200

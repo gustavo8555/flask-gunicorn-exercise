@@ -23,3 +23,7 @@ def add_user():
     email = user.email
     return {'email': str(email)}, 200
 
+@app.route("/users/<email>", methods=['DELETE'])
+def delete_user(email):
+    User.objects.get(email=email).delete()
+    return '', 200
