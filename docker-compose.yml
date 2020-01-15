@@ -16,6 +16,12 @@ services:
             - DB=mongodb://mongodb:27017/super_users
         depends_on:
             - mongodb
+    nginx:
+        build: ./nginx
+        container_name: nginx
+        restart: always
+        ports:
+            - "80:80"
     mongodb:
         image: mongo
         container_name: 'mongodb'
