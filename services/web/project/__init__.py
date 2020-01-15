@@ -27,3 +27,9 @@ def add_user():
 def delete_user(email):
     User.objects.get(email=email).delete()
     return '', 200
+
+@app.route("/users/<email>", methods=['PUT'])
+def update_user(email):
+    body = request.get_json()
+    User.objects.get(email=email).update(**body)
+    return '', 200
