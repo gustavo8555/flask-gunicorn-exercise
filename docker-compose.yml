@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
     web:
-        build: ./services/web
+        build: ./services
         command: python manage.py run -h 0.0.0.0
         volumes:
-            - ./services/web/:/usr/src/app/
+            - ./services/:/usr/src/app/
         ports:
             - 5000:5000
         env_file:
@@ -25,6 +25,6 @@ services:
             - MONGO_INITDB_ROOT_USERNAME=root
             - MONGO_INITDB_ROOT_PASSWORD=example
         volumes:
-            - ./services/web/db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
+            - ./services/db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro 
         ports:
             - '27017-27019:27017-27019'
