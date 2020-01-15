@@ -3,11 +3,11 @@ version: '3.7'
 services:
     web:
         build: ./services
-        command: python manage.py run -h 0.0.0.0
+        command: gunicorn --bind 0.0.0.0:5000 manage:app
         volumes:
             - ./services/:/usr/src/app/
-        ports:
-            - 5000:5000
+        expose:
+            - 5000
         env_file:
             - ./.env.dev
         environment:
@@ -18,10 +18,10 @@ services:
             - mongodb
     nginx:
         build: ./nginx
-        container_name: nginx
-        restart: always
         ports:
             - "80:80"
+        depends_on:
+            - web
     mongodb:
         image: mongo
         container_name: 'mongodb'
